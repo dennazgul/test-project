@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-const todos = [
-  'Первая строка',
-  'Второй пункт',
-  'Кажется, работает',
-  'Точно!',
-  ];
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-first-attempt',
@@ -14,7 +8,18 @@ const todos = [
 })
 export class FirstAttemptComponent {
   title = 'shit parad';
-  todos = todos;
+  valueFromInput = 'g';
+  todos = [
+    'Первая строка',
+    'Второй пункт',
+    'Кажется, работает',
+    'Точно!',
+    ];
+    onClick () {
+     // if(!_.isEmpty(this.valueFromInput)) {
+        this.todos.push(this.valueFromInput);
+     // }
+    }
 }
 /*export class FirstAttemptComponent implements OnInit {
 
