@@ -32,7 +32,7 @@ export class FirstAttemptComponent {
     const elementWithMaxId: arrayModel = _.maxBy(this.todos, "id");
     return _.isUndefined(elementWithMaxId) ? 0 : elementWithMaxId.id + 1;
   }
-  getIdForChange(arrayModel: arrayModel): number {
+  getIdForChange(arrayModel: arrayModel) {
     const currentElementId = arrayModel.id;
     this.idForChange = currentElementId;
   }
