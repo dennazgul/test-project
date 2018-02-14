@@ -10,7 +10,7 @@ import { arrayModel } from '../first-attempt/array-model'
 export class FirstAttemptComponent {
   title = 'shit parad';
   valueFromInput = '';
-  editMode = '';
+  editMode: arrayModel = null;
   idForChange: number;
   valueFromChangedInput = 'введите текст'
   todos: arrayModel[] = [];
@@ -26,29 +26,36 @@ export class FirstAttemptComponent {
     const elementWithMaxId: arrayModel = _.maxBy(this.todos, "id");
     return _.isUndefined(elementWithMaxId) ? 0 : elementWithMaxId.id + 1;
   }
-  getIdForChange(arrayModel: arrayModel) {
-    this.idForChange = arrayModel.id;
+  getIdForChange(todo: arrayModel) {
+    this.idForChange = todo.id;
   }
-  onDelete(arrayModel: arrayModel) {
+  onDelete(todo: arrayModel) {
     _.remove(this.todos, (todo1: arrayModel) => {
-      return todo1.id === arrayModel.id;
+      return todo1.id === todo.id;
     })
+  }
+  compareTodo (todo1: arrayModel):boolean {
+    return todo1.id === this.editMode.id;
   }
   blaster() {
     if (!_.isEmpty(this.valueFromInput)) {
-      if (!_.isEmpty(this.editMode)) {
-        const changedElement = new arrayModel();
+      if (!_.isNull(this.editMode)) {
+        /*const changedElement = new arrayModel();
         changedElement.id = this.idForChange;
         changedElement.title = this.valueFromInput;
         this.todos.splice(changedElement.id, 1, changedElement);
         this.valueFromInput = '';
-        this.editMode = '';
+        this.editMode = undefined;*/
+        const changedElement =_.find(this.todos, this.compareTodo );
+        if (!_.isUndefined(changedElement)) {
+          changedElement.title =this.valueFromInput;
+        }
       }
       else {
-      const newElement = new arrayModel();
-      newElement.id = this.getNextId();
-      newElement.title = this.valueFromInput;
-      this.todos.push(newElement);
+        const newElement = new arrayModel();
+        newElement.id = this.getNextId();
+        newElement.title = this.valueFromInput;
+        this.todos.push(newElement);
       }
     }
   }
