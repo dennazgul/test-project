@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Todo } from './array-model';
 import * as _ from 'lodash';
-import { arrayModel } from '../first-attempt/array-model'
 
 @Component({
   selector: 'app-first-attempt',
@@ -8,63 +8,50 @@ import { arrayModel } from '../first-attempt/array-model'
   styleUrls: ['first-attempt.component.css']
 })
 export class FirstAttemptComponent {
-  title = 'shit parad';
-  valueFromInput = '';
-  editMode: arrayModel = null;
-  idForChange: number;
-  valueFromChangedInput = 'введите текст'
-  todos: arrayModel[] = [];
-  onClick() {
-    if (!_.isEmpty(this.valueFromInput)) {
-      const newElement = new arrayModel();
-      newElement.id = this.getNextId();
-      newElement.title = this.valueFromInput;
-      this.todos.push(newElement);
-    }
+  todosList: Todo[] =[];//создаем пустой массив элементов класса тодо
+  activeItem: Todo = new Todo();//создаём переменную с классом тодо
+  constructor() { //ВОПРОС какая разница, в конструкторе что-то или за его пределами
+    const todo = new Todo();
+    todo.id = 1;
+    todo.title = 'test';
+    const todo1 = new Todo();
+    todo1.id = 2;
+    todo1.title = 'test2';
+    this.todosList.push(todo);//ВОПРОС всякие "штуки" типа slice, push и т.д. могут использоваться без вызова функции? здесб же это не часть функции. а просто... объявление или что-то такое.
+    this.todosList.push(todo1);
+    //this.activeItem = _.clone(this.todosList[0]);
   }
-  getNextId(): number {
-    const elementWithMaxId: arrayModel = _.maxBy(this.todos, "id");
-    return _.isUndefined(elementWithMaxId) ? 0 : elementWithMaxId.id + 1;
+
+  ngOnInit() {}
+  onEditItem(todo: Todo) {
+    this.activeItem = _.clone(todo);
   }
-  getIdForChange(todo: arrayModel) {
-    this.idForChange = todo.id;
-  }
-  onDelete(todo: arrayModel) {
-    _.remove(this.todos, (todo1: arrayModel) => {
+  onDeleteItem(todo: Todo) {
+    _.remove(this.todosList, (todo1: Todo) => {
       return todo1.id === todo.id;
-    })
+    });
   }
-  compareTodo (todo1: arrayModel):boolean {
-    return todo1.id === this.editMode.id;
-  }
-  blaster() {
-    if (!_.isEmpty(this.valueFromInput)) {
-      if (!_.isNull(this.editMode)) {
-        /*const changedElement = new arrayModel();
-        changedElement.id = this.idForChange;
-        changedElement.title = this.valueFromInput;
-        this.todos.splice(changedElement.id, 1, changedElement);
-        this.valueFromInput = '';
-        this.editMode = undefined;*/
-        const changedElement =_.find(this.todos, this.compareTodo );
-        if (!_.isUndefined(changedElement)) {
-          changedElement.title =this.valueFromInput;
+  onAdd(todo: Todo) {
+    if (!_.isUndefined(todo)) {
+      if (!_.isUndefined(todo.id)) {
+        const index = _.find(this.todosList, (todo1: Todo) => {
+          return todo1.id === todo.id;
+        });
+        if (!_.isUndefined(index)) {
+          index.title = todo.title;
         }
-      }
-      else {
-        const newElement = new arrayModel();
-        newElement.id = this.getNextId();
-        newElement.title = this.valueFromInput;
-        this.todos.push(newElement);
-      }
+        this.activeItem = new Todo();
+      } else {
+      const newElement = new Todo();
+      newElement.id = this.getId();
+      newElement.title = todo.title;
+      this.todosList.push(newElement);
     }
+  }
+    this.activeItem = new Todo();
+  }
+  getId(): number {
+    const maxId: Todo = _.maxBy(this.todosList, 'id');
+    return _.isUndefined(maxId) ? 0 : maxId.id + 1;
   }
 }
-/*export class FirstAttemptComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}*/
