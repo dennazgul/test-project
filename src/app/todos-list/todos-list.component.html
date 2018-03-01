@@ -1,8 +1,7 @@
 <ul>
+  <div>Список элементов:</div>
   <li *ngFor='let todo of todos'>{{ todo.title }}
-    <button type="button" class="btn btn-primary" (click)="onDelete(todo)">Delete</button>
-    <button type="button" class="btn btn-primary" (click)='onEdit(todo)'>Edit</button>
-
+    <button type="button" class="btn btn-primary" (click)="onDelete(todo)">Удалить</button>
+    <button type="button" class="btn btn-primary" (click)='onEdit(todo)' *ngIf='!(todo.id ==todoEdit.id)'>Редактировать</button>
   </li>
-
 </ul>

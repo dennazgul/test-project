@@ -8,26 +8,27 @@ import * as _ from 'lodash';
   styleUrls: ['first-attempt.component.css']
 })
 export class FirstAttemptComponent {
-  todosList: Todo[] = [];//создаем пустой массив элементов класса тодо для того чтобы в дальнейшем помещать элементы
-  activeItem: Todo = new Todo();//создаём переменную с классом тодо для работы со смежными компонентами
+  editFormToggle = false;
+  addButtonToggle = true;
+  todosList: Todo[] = [];
+  activeItem: Todo = new Todo();
+  activeUpperItem: Todo = new Todo();
   constructor() {
-    const todo = new Todo();//первый элемент списка todosList
-    todo.id = 1;//его айди
+    const todo = new Todo();
+    todo.id = 1;
     todo.title = 'test';
-    const todo1 = new Todo();//второй элемент списка todosList
+    const todo1 = new Todo();
     todo1.id = 2;
     todo1.title = 'test2';
     todo1.title = 'test3';
-    this.todosList.push(todo);//в наш пустой массив помещается инициализированный выше элемент
-    //ВОПРОС всякие "штуки" типа slice, push и т.д. могут использоваться без вызова функции? здесб же это не часть функции. а просто... объявление или что-то такое.
-    this.todosList.push(todo1);//в наш уже не пустой массив помещается инициализированный выше элемент номер два
-    //this.activeItem = _.clone(this.todosList[0]);
+    this.todosList.push(todo);
+    this.todosList.push(todo1);
   }
 
   ngOnInit() { }
   onEditItem(todo: Todo) {
-    this.activeItem = _.clone(todo);// создаем клон прилетающей из другой компоненты переменной todo
-    //для того, чтобы при нажатии кнопки "редактировать" в инпут подлетела копия,которую мы меняем
+    this.activeItem = _.clone(todo);
+    this.activeUpperItem = _.clone(todo);
   }
   onDeleteItem(todo: Todo) {
     _.remove(this.todosList, (todo1: Todo) => {
@@ -51,17 +52,26 @@ export class FirstAttemptComponent {
       }
     }
     this.activeItem = new Todo();
+    this.activeUpperItem = new Todo();
   }
-  cleaning (todo:Todo) {
-    //todo = undefined;
-    if (!_.isUndefined(todo.id)) {// обязательно по айдишнику, а не тайтлу. могу рассказать зачем
-      this.activeItem.title = undefined;
-    } else {
-    this.activeItem = new Todo();
+  cleaning() {
+    this.activeItem.title = undefined;
   }
+  onCancelItem(todoUpper: Todo) {
+    this.activeItem = _.clone(this.activeUpperItem);
   }
   getId(): number {
     const itemWithMaxId: Todo = _.maxBy(this.todosList, 'id');
     return _.isUndefined(itemWithMaxId) ? 0 : itemWithMaxId.id + 1;
+  }
+  addButtonFunction() {
+    this.editFormToggle = !this.editFormToggle;
+    this.addButtonToggle = !this.addButtonToggle;
+  }
+  closeButtonFunction() {
+    this.editFormToggle = !this.editFormToggle;
+    this.addButtonToggle = !this.addButtonToggle;
+    this.activeItem = new Todo();
+    this.activeUpperItem = new Todo();
   }
 }

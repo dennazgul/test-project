@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Todo } from '../first-attempt/array-model';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-todos-list',
@@ -8,11 +9,12 @@ import { Todo } from '../first-attempt/array-model';
 })
 export class TodosListComponent implements OnInit {
   @Input() todos: Todo[];
+  @Input() todoEdit: Todo = new Todo();
   @Output() edit: EventEmitter<Todo> = new EventEmitter<Todo>();
   @Output() delete: EventEmitter<Todo> = new EventEmitter<Todo>();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   onEdit(todo: Todo) {
     this.edit.emit(todo);
   }
