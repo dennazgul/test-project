@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-first-attempt',
   templateUrl: 'first-attempt.component.html',
-  styleUrls: ['first-attempt.component.css']
+  styleUrls: ['first-attempt.component.scss']
 })
 export class FirstAttemptComponent {
   editFormToggle = false;
@@ -67,11 +67,13 @@ export class FirstAttemptComponent {
   addButtonFunction() {
     this.editFormToggle = !this.editFormToggle;
     this.addButtonToggle = !this.addButtonToggle;
+    //при нажатии на кнопку "добавить" меняется значение двух переменных. одна прячет кнопку, другая открывает форму редактирования
   }
   closeButtonFunction() {
     this.editFormToggle = !this.editFormToggle;
     this.addButtonToggle = !this.addButtonToggle;
     this.activeItem = new Todo();
     this.activeUpperItem = new Todo();
+    //функция работает при нажатии кнопки "закрыть". Поле очищается, форма исчезает, а кнопка "добавить" становится активной
   }
 }

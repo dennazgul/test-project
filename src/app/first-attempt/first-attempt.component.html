@@ -1,9 +1,12 @@
-<div>
-  <h4>
-    Этот текст написан в компоненте first-component.component, которая находится в папке first-module</h4>
+<div class='componentPadding test'>
+  <div class='gg'>
+    Этот текст написан в компоненте first-component.component, которая находится в папке first-module
+  </div>
   <button type="button" class="btn btn-primary" (click)="addButtonFunction()" *ngIf="addButtonToggle">Добавить</button>
+  <!-- на конпке стоит условия скрытия после нажатия. логика описана в ts-->
   <app-todo-edit [todo]='activeItem' [todoUpper]='activeUpperItem' (onUpdate)='onAdd($event)' (onClear)='cleaning() ' (onCancel)='onCancelItem($event)'
     (onClose)='closeButtonFunction($event)' *ngIf="editFormToggle"></app-todo-edit>
+  <!--форма не работет, пока ты не нажал кнопку"добавить". Логика описана в ts-->
   <app-todos-list [todos]="todosList" [todoEdit]="activeItem" (edit)='onEditItem($event)' (delete)='onDeleteItem($event)'>
   </app-todos-list>
 </div>

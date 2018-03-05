@@ -9,7 +9,7 @@ import * as _ from 'lodash';
 })
 export class TodosListComponent implements OnInit {
   @Input() todos: Todo[];
-  @Input() todoEdit: Todo = new Todo();
+  @Input() todoEdit: Todo = new Todo();//элемент, который прилетает в это компоненту из основной при нажатии кнопки "редактировать". Необходим для работы с выбранным элементом.
   @Output() edit: EventEmitter<Todo> = new EventEmitter<Todo>();
   @Output() delete: EventEmitter<Todo> = new EventEmitter<Todo>();
   constructor() { }

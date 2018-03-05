@@ -7,4 +7,5 @@
 </div>
 <br>
 
-<button type="button" class="btn btn-primary" [disabled]="!todo.title || !(todo.title !==todoUpper.title)" (click)='onAdd()'>Сохранить</button>
+<button type="button" class="btn btn-primary" [disabled]="!todo.title || todo.title==todoUpper.title" (click)='onAdd()'>Сохранить</button>
+<!--Кнопка "сохранить" задизейблена при следующих случаях: ИЛИ поле инпута пустое, ИЛИ поле инпута совпадает с заголовком, т.е. пользователь не вносил никаких изменений-->
