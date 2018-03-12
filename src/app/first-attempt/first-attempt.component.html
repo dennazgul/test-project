@@ -1,3 +1,8 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
 <div class='componentPadding test'>
   <div class='gg'>
     Этот текст написан в компоненте first-component.component, которая находится в папке first-module
@@ -9,4 +14,8 @@
   <!--форма не работет, пока ты не нажал кнопку"добавить". Логика описана в ts-->
   <app-todos-list [todos]="todosList" [todoEdit]="activeItem" (edit)='onEditItem($event)' (delete)='onDeleteItem($event)'>
   </app-todos-list>
+  <div class='row'>
+    <div class="col-md-8">.col-md-8</div>
+		<div class="col-md-4">.col-md-4</div>
+  </div>
 </div>
