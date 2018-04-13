@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
 import { FirstAttemptComponent } from './first-attempt/first-attempt.component';
 import { TodosListComponent } from './todos-list/todos-list.component';
 import { TodoEditComponent } from './todo-edit/todo-edit.component';
+import { TodoService } from './services/todo-service';
+import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 
 
 @NgModule({
@@ -14,12 +16,13 @@ import { TodoEditComponent } from './todo-edit/todo-edit.component';
     AppComponent,
     FirstAttemptComponent,
     TodosListComponent,
-    TodoEditComponent
+    TodoEditComponent,
+    DialogDeleteComponent
   ],
   imports: [
     BrowserModule, FormsModule
   ],
-  providers: [],
+  providers: [TodoService],
   bootstrap: [AppComponent,
     FirstAttemptComponent
   ]

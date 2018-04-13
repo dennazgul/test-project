@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Todo } from '../first-attempt/array-model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DialogDeleteComponent } from '../dialog-delete/dialog-delete.component';
 import * as _ from 'lodash';
 
 @Component({
@@ -9,16 +11,21 @@ import * as _ from 'lodash';
 })
 export class TodosListComponent implements OnInit {
   @Input() todos: Todo[];
-  @Input() todoEdit: Todo = new Todo();//элемент, который прилетает в это компоненту из основной при нажатии кнопки "редактировать". Необходим для работы с выбранным элементом.
+  @Input() todoEdit: Todo = new Todo();
   @Output() edit: EventEmitter<Todo> = new EventEmitter<Todo>();
   @Output() delete: EventEmitter<Todo> = new EventEmitter<Todo>();
-  constructor() { }
+  constructor(public dialog: NgbModal) { }
 
   ngOnInit() { }
   onEdit(todo: Todo) {
     this.edit.emit(todo);
   }
   onDelete(todo: Todo) {
-    this.delete.emit(todo);
+    const dialogRef = this.dialog.open(DialogDeleteComponent);
+    dialogRef.result.then(rsp => {
+      if (rsp === true) {
+        this.delete.emit(todo);
+      }
+    });
   }
 }

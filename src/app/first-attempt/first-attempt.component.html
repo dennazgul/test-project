@@ -7,15 +7,9 @@
   <div class='gg'>
     Этот текст написан в компоненте first-component.component, которая находится в папке first-module
   </div>
-  <button type="button" class="btn btn-primary" (click)="addButtonFunction()" *ngIf="addButtonToggle">Добавить</button>
-  <!-- на конпке стоит условия скрытия после нажатия. логика описана в ts-->
-  <app-todo-edit [todo]='activeItem' [todoUpper]='activeUpperItem' (onUpdate)='onAdd($event)' (onClear)='cleaning() ' (onCancel)='onCancelItem($event)'
-    (onClose)='closeButtonFunction($event)' *ngIf="editFormToggle"></app-todo-edit>
-  <!--форма не работет, пока ты не нажал кнопку"добавить". Логика описана в ts-->
+  <button type="button" class="btn btn-primary" (click)="openEditForm()" *ngIf="addButtonToggle">Добавить</button>
+  <app-todo-edit [todo]='activeItem' (onUpdate)='onAdd($event)' (onClear)='cleaning() ' (onCancel)='onCancelItem($event)'
+    (onClose)='closeEditForm()' *ngIf="!addButtonToggle"></app-todo-edit>
   <app-todos-list [todos]="todosList" [todoEdit]="activeItem" (edit)='onEditItem($event)' (delete)='onDeleteItem($event)'>
   </app-todos-list>
-  <div class='row'>
-    <div class="col-md-8">.col-md-8</div>
-		<div class="col-md-4">.col-md-4</div>
-  </div>
 </div>
