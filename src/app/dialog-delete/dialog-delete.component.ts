@@ -8,7 +8,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DialogDeleteComponent implements OnInit {
 
-  constructor(public dialogRef: NgbActiveModal) { }
+  constructor(public dialogRef: NgbActiveModal) {
+    console.log('dialog constructor');
+  }
 
   ngOnInit() {
   }
