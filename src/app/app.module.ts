@@ -9,6 +9,7 @@ import { TodosListComponent } from './todos-list/todos-list.component';
 import { TodoEditComponent } from './todo-edit/todo-edit.component';
 import { TodoService } from './services/todo-service';
 import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
+import { NumberChangerPipe } from './number-changer.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
     FirstAttemptComponent,
     TodosListComponent,
     TodoEditComponent,
-    DialogDeleteComponent
+    DialogDeleteComponent,
+    NumberChangerPipe
   ],
   entryComponents: [DialogDeleteComponent],
   imports: [BrowserModule, FormsModule, NgbModule.forRoot()],

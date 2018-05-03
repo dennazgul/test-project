@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from './array-model';
 import * as _ from 'lodash';
-import { TodoService } from '../services/todo-service'
+import { TodoService } from '../services/todo-service';
+import { NumberChangerPipe } from '../number-changer.pipe';
 
 @Component({
   selector: 'app-first-attempt',
   templateUrl: 'first-attempt.component.html',
-  styleUrls: ['first-attempt.component.scss']
+  styleUrls: ['first-attempt.component.scss'],
 })
 export class FirstAttemptComponent {
   addButtonToggle = true;

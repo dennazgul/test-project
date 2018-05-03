@@ -1,6 +1,6 @@
 <ul>
   <div>Список элементов:</div>
-  <li *ngFor='let todo of todos'>{{ todo.title }}
+  <li *ngFor='let todo of todos'>{{ todo.title | numberChanger: 'O' }}
     <button type="button" class="btn btn-primary" (click)="onDelete(todo)">Удалить</button>
     <button type="button" class="btn btn-primary" (click)='onEdit(todo)' *ngIf='!(todo.id ==todoEdit.id)'>Редактировать</button>
     <!-- на кнопке "редактировать" висит логика, что, если id того элемента, на котором мы нажимаем кнопку, совпадает с id передаваемоего из основной компоненты элемента, кнопка пропадает-->

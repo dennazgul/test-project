@@ -5,7 +5,7 @@
 </head>
 <div class='componentPadding test'>
   <div class='gg'>
-    Этот текст написан в компоненте first-component.component, которая находится в папке first-module
+    {{'Этот текст написан в компоненте first-component.component228, которая находится в папке first-module' | numberChanger: 'XL' }}
   </div>
   <button type="button" class="btn btn-primary" (click)="openEditForm()" *ngIf="addButtonToggle">Добавить</button>
   <app-todo-edit [todo]='activeItem' (onUpdate)='onAdd($event)' (onClear)='cleaning() ' (onCancel)='onCancelItem($event)'
